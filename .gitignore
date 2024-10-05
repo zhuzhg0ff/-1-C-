@@ -250,7 +250,7 @@ int main() {
                 char letter;
                 cout << "Введите букву: ";
                 cin >> letter;
-                cout << (isUpperCase(letter) ? "Буква верхнего регистра." : "Буква не является верхнего регистра.") << endl;
+                cout << (isUpperCase(letter) ? "Большая буква." : "Маленькая буква.") << endl;
                 break;
             }
             case 4: {
