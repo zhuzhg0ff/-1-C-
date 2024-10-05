@@ -1,0 +1,350 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <limits>
+
+using namespace std;
+
+// Функция для суммы двух последних цифр числа
+int sumLastNums(int x) {
+    int num;
+    cout << "Введите число: ";
+    cin >> num;
+    return (num % 10) + ((num / 10) % 10);
+}
+
+// Функция для проверки положительности числа
+bool isPositive(int x) {
+    int num;
+    cout << "Введите число: ";
+    cin >> num;
+    return num > 0;
+}
+
+// Функция для проверки большой буквы
+bool isUpperCase(char x) {
+    char letter;
+    cout << "Введите букву: ";
+    cin >> letter;
+    return letter >= 'A' && letter <= 'Z';
+}
+
+// Функция для проверки делителя
+bool isDivisor(int a, int b) {
+    cout << "Введите первое число: ";
+    cin >> a;
+    cout << "Введите второе число: ";
+    cin >> b;
+    return a % b == 0 || b % a == 0;
+}
+
+// Функция для суммы цифр двух чисел
+int lastNumSum(int a, int b) {
+    int num1, num2;
+    cout << "Введите первое число: ";
+    cin >> num1;
+    cout << "Введите второе число: ";
+    cin >> num2;
+    return (num1 % 10) + (num2 % 10);
+}
+
+// Функция для безопасного деления
+double safeDiv(int x, int y) {
+    cout << "Введите числитель: ";
+    cin >> x;
+    cout << "Введите знаменатель: ";
+    cin >> y;
+    return y != 0 ? static_cast<double>(x) / y : 0;
+}
+
+// Функция для формирования строки сравнения
+string makeDecision(int x, int y) {
+    cout << "Введите первое число: ";
+    cin >> x;
+    cout << "Введите второе число: ";
+    cin >> y;
+    if (x > y) {
+        return to_string(x) + ">" + to_string(y);
+    } else if (x < y) {
+        return to_string(x) + "<" + to_string(y);
+    } else {
+        return to_string(x) + "==" + to_string(y);
+    }
+}
+
+// Функция для проверки суммы трех чисел
+bool sum3(int x, int y, int z) {
+    cout << "Введите первое число: ";
+    cin >> x;
+    cout << "Введите второе число: ";
+    cin >> y;
+    cout << "Введите третье число: ";
+    cin >> z;
+    return (x + y == z) || (x + z == y) || (y + z == x);
+}
+
+// Функция для формирования строки возраста
+string age(int x) {
+    int years;
+    cout << "Введите возраст: ";
+    cin >> years;
+    switch (years % 10) {
+        case 1:
+            return to_string(years) + " год";
+        case 2:
+        case 3:
+        case 4:
+            return to_string(years) + " года";
+        default:
+            return to_string(years) + " лет";
+    }
+}
+
+// Функция для вывода дней недели
+void printDays() {
+    string day;
+    cout << "Введите день недели: ";
+    cin >> day;
+    static const string days[] = {"понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"};
+    
+    bool isValidDay = false;
+    for (int i = 0; i < 7; ++i) {
+        if (days[i] == day) {
+            isValidDay = true;
+            cout << day << endl;
+            for (int j = i; j < 7; ++j) {
+                cout << days[j] << endl;
+            }
+            break;
+        }
+    }
+    
+    if (!isValidDay) {
+        cout << "это не день недели" << endl;
+    }
+}
+
+// Функция для обратного списка чисел
+string reverseListNums(int x) {
+    int num;
+    cout << "Введите число: ";
+    cin >> num;
+    string result = "";
+    while (num > 0) {
+        result += to_string(num % 10) + " ";
+        num /= 10;
+    }
+    return result.substr(0, result.length() - 1);
+}
+
+// Функция для возведения в степень
+int pow(int x, int y) {
+    int base, exponent;
+    cout << "Введите основание: ";
+    cin >> base;
+    cout << "Введите степень: ";
+    cin >> exponent;
+    int result = 1;
+    for (int i = 0; i < exponent; ++i) {
+        result *= base;
+    }
+    return result;
+}
+
+// Функция для проверки одинаковости цифр числа
+bool equalNum(int x) {
+    int num;
+    cout << "Введите число: ";
+    cin >> num;
+    int lastDigit = num % 10;
+    int secondLastDigit = (num / 10) % 10;
+    int thirdLastDigit = (num / 100) % 10;
+    return lastDigit == secondLastDigit && secondLastDigit == thirdLastDigit;
+}
+
+// Функция для вывода левого треугольника
+void leftTriangle() {
+    int height;
+    cout << "Введите высоту треугольника: ";
+    cin >> height;
+    for (int i = 1; i <= height; ++i) {
+        for (int j = 1; j <= i; ++j) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+// Функция для угадайки
+void guessGame() {
+    srand(time(NULL)); // Инициализация генератора случайных чисел
+    int secretNumber = rand() % 10;
+    int attempts = 0;
+
+    while (true) {
+        int guess;
+        cout << "Введите число от 0 до 9: ";
+        cin >> guess;
+        
+        attempts++;
+        
+        if (guess == secretNumber) {
+            cout << "Вы угадали!" << endl;
+            cout << "Вы отгадали число за " << attempts << " попыток." << endl;
+            break;
+        } else {
+            cout << "Вы не угадали, попробуйте еще раз." << endl;
+        }
+    }
+}
+
+int main() {
+    int choice;
+    const string menu = R"(Меню задач:
+1. Сумма двух последних цифр числа
+2. Проверка положительности числа
+3. Проверка большой буквы
+4. Проверка делителя
+5. Сумма цифр двух чисел
+6. Безопасное деление
+7. Строка сравнения
+8. Проверка суммы трех чисел
+9. Формирование строки возраста
+10. Вывод дней недели
+11. Числа наоборот
+12. Возведение в степень
+13. Проверка одинаковости цифр числа
+14. Вывод левого треугольника
+15. Игра "Угадайка"
+16. Выход из программы)";
+
+    do {
+        system("cls"); // Очистка экрана
+        cout << menu << "\n\nВыберите задачу (1-" << 16 << "): ";
+        cin >> choice;
+
+        // Проверка ввода
+        while (!(cin && choice >= 1 && choice <= 16)) {
+            cout << "Неверный выбор. Пожалуйста, введите число от 1 до 16: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin >> choice;
+        }
+
+                switch (choice) {
+            case 1: {
+                int num;
+                cout << "Введите число: ";
+                cin >> num;
+                cout << "Сумма двух последних цифр: " << sumLastNums(num) << endl;
+                break;
+            }
+            case 2: {
+                int num;
+                cout << "Введите число: ";
+                cin >> num;
+                cout << (isPositive(num) ? "Число положительное." : "Число отрицательное или нулевое.") << endl;
+                break;
+            }
+            case 3: {
+                char letter;
+                cout << "Введите букву: ";
+                cin >> letter;
+                cout << (isUpperCase(letter) ? "Буква верхнего регистра." : "Буква не является верхнего регистра.") << endl;
+                break;
+            }
+            case 4: {
+                int a, b;
+                cout << "Введите первое число: ";
+                cin >> a;
+                cout << "Введите второе число: ";
+                cin >> b;
+                cout << (isDivisor(a, b) ? "Одно число делит другое." : "Одно число не делит другое.") << endl;
+                break;
+            }
+            case 5: {
+                int num1, num2;
+                cout << "Введите первое число: ";
+                cin >> num1;
+                cout << "Введите второе число: ";
+                cin >> num2;
+                cout << "Сумма цифр двух чисел: " << lastNumSum(num1, num2) << endl;
+                break;
+            }
+            case 6: {
+                int x, y;
+                cout << "Введите числитель: ";
+                cin >> x;
+                cout << "Введите знаменатель: ";
+                cin >> y;
+                cout << "Результат безопасного деления: " << safeDiv(x, y) << endl;
+                break;
+            }
+            case 7: {
+                int x, y;
+                cout << "Введите первое число: ";
+                cin >> x;
+                cout << "Введите второе число: ";
+                cin >> y;
+                string result = makeDecision(x, y);
+                cout << result << endl;
+                break;
+            }
+            case 8: {
+                int x, y, z;
+                cout << "Введите первое число: ";
+                cin >> x;
+                cout << "Введите второе число: ";
+                cin >> y;
+                cout << "Введите третье число: ";
+                cin >> z;
+                cout << ((sum3(x, y, z)) ? "Два числа можно сложить для получения третьего." : "Два числа нельзя сложить для получения третьего.") << endl;
+                break;
+            }
+            case 9: {
+                int years;
+                cout << "Введите возраст: ";
+                cin >> years;
+                cout << "Возраст: " << age(years) << endl;
+                break;
+            }
+            case 10: printDays(); break;
+            case 11: {
+                int num;
+                cout << "Введите число: ";
+                cin >> num;
+                cout << reverseListNums(num) << endl;
+                break;
+            }
+            case 12: {
+                int base, exponent;
+                cout << "Введите основание: ";
+                cin >> base;
+                cout << "Введите степень: ";
+                cin >> exponent;
+                cout << "Результат возведения в степень: " << pow(base, exponent) << endl;
+                break;
+            }
+            case 13: {
+                int num;
+                cout << "Введите число: ";
+                cin >> num;
+                cout << (equalNum(num) ? "Все цифры числа одинаковы." : "Цифры числа не все одинаковы.") << endl;
+                break;
+            }
+            case 14: leftTriangle(); break;
+            case 15: guessGame(); break;
+            case 16: return 0;
+        }
+
+        // Пауза перед следующим выбором
+        cout << "\nНажмите Enter для продолжения или Esc для выхода из программы...";
+        char choiceAgain;
+        cin.get(choiceAgain);
+        if (choiceAgain == '\033') { // Esc нажато
+            return 0;
+        }
+    } while (true);
+
+    return 0;
+}
